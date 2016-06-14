@@ -3,6 +3,8 @@ package br.com.luizalexandrew.crudjsp.ModelDao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.mysql.jdbc.Connection;
 
@@ -43,22 +45,34 @@ public class UsuarioDao {
 	}
 	
 	
-	public ResultSet recuperarAll(){
+	public List<Usuario> recuperarAll(){
 		ResultSet resultado = null;
+		List<Usuario> usuarios = new ArrayList<Usuario>();
 		String sql = "SELECT * FROM crudjsp.usuario";
 		
 		try{
-			
 			PreparedStatement stmt = connection.prepareStatement(sql);
-	
 			resultado = stmt.executeQuery();
 
 			System.out.println("Usuário Recuperado");
+			 
+			 while(resultado.next()){
+				 Usuario usuario = new Usuario();
+				 usuario.setId(Integer.parseInt(resultado.getString("id")));
+				 usuario.setNome(resultado.getString("nome"));
+				 usuario.setEmail(resultado.getString("email"));
+				 usuario.setCpf(resultado.getString("cpf"));
+				 
+				 usuarios.add(usuario);
+
+			 }
+			
 			
 		}catch(SQLException e){
 			System.out.println(e);
 		}
-		return resultado;		
+		
+		return usuarios;		
 	}
 	
 	
@@ -110,6 +124,23 @@ public class UsuarioDao {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 
 			stmt.setLong(1, user.getId());
+			
+			stmt.execute();
+			stmt.close();
+			System.out.println("Usuário Removido");
+		}catch(SQLException e){
+			System.out.println(e);
+		}		
+	}
+	
+	public void remove(String id){		
+		String sql = "DELETE FROM crudjsp.usuario " + "WHERE id=?";
+		
+		try{
+			
+			PreparedStatement stmt = connection.prepareStatement(sql);
+
+			stmt.setLong(1, Integer.parseInt(id));
 			
 			stmt.execute();
 			stmt.close();

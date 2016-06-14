@@ -1,13 +1,15 @@
 package br.com.luizalexandrew.crudjsp;
 
-import java.sql.SQLException;
+import java.util.List;
 
 import br.com.luizalexandrew.crudjsp.Model.Usuario;
 import br.com.luizalexandrew.crudjsp.ModelDao.UsuarioDao;
 
 public class Main {
 
-	public static void main(String[] args) throws SQLException {
+	public static void main(String[] args){
+		
+
 //			
 //		Usuario user = new Usuario(5, "odin", "775.856.326-11", "odin-apple@mac.com");
 //		
@@ -28,16 +30,21 @@ public class Main {
 //		UsuarioDao userDao = new UsuarioDao();
 //	
 //		userDao.remove(user);
-//		
-		
-		UsuarioDao userDao = new UsuarioDao();
-		Usuario user = userDao.recuperarUsuario(1);
-		
-		System.out.println(user.getNome() + " - " + user.getEmail() + " - " + user.getCpf());
+
 		
 //		UsuarioDao userDao = new UsuarioDao();
-//		ResultSet user = userDao.recuperarAll();
+//		Usuario user = userDao.recuperarUsuario(1);
 //		
+//		System.out.println(user.getNome() + " - " + user.getEmail() + " - " + user.getCpf());
+		
+		UsuarioDao userDao = new UsuarioDao();
+		List<Usuario> user = userDao.recuperarAll();
+		
+
+		for(Usuario usuario: user){
+			System.out.println(usuario.getEmail());
+		}
+		
 //		while(user.next()){
 //			System.out.println(user.getString("email"));
 //		}

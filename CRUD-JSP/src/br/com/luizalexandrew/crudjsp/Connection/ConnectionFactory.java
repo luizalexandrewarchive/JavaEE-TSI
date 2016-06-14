@@ -11,11 +11,15 @@ public class ConnectionFactory {
 		
 	public static Connection getConnection(){
 		
+		String driverName = "com.mysql.jdbc.Driver";
+		
 		if(connection == null){
+			
 			try{
+				Class.forName(driverName);
 				connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/crudjsp", "root", "windows");
 				System.out.println("Sucesso ao fazer a conexão com o banco");
-			}catch (SQLException e){
+			}catch (ClassNotFoundException | SQLException e){
 				System.out.println("Falha na conexão com o banco");			
 			}
 		}

@@ -1,5 +1,9 @@
 package br.com.luizalexandrew.crudjsp.Model;
 
+import java.util.List;
+
+import br.com.luizalexandrew.crudjsp.ModelDao.UsuarioDao;
+
 public class Usuario {
 
 	private int id;
@@ -27,7 +31,32 @@ public class Usuario {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.email = email;
-	}	
+	}
+	
+	public List<Usuario> recuperarAll() {
+		UsuarioDao userdao = new UsuarioDao();
+		return userdao.recuperarAll();
+	}
+	
+	public Usuario recuperarUser(String id){
+		UsuarioDao userdao = new UsuarioDao();
+		return userdao.recuperarUsuario(Integer.parseInt(id));
+	}
+	
+	public void atualizar(){
+		UsuarioDao userdao = new UsuarioDao();
+		userdao.atualizar(this);
+	}
+	
+	public void cadastrar(){
+		UsuarioDao userdao = new UsuarioDao();
+		userdao.adiciona(this);
+	}
+	
+	public void excluir(String id){
+		UsuarioDao userdao = new UsuarioDao();
+		userdao.remove(id);
+	}
 	
 	public int getId() {
 		return id;
@@ -52,9 +81,5 @@ public class Usuario {
 	}
 	public void setEmail(String email) {
 		this.email = email;
-	}
-	
-	
-	
-	
+	}	
 }
