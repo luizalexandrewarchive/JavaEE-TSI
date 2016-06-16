@@ -42,11 +42,11 @@
 		<form action="Cadastro.jsp" method="post">
 			<input type="hidden" name="cadastrar" value="true">
 			<label>Nome:</label>
-			<input type="text" name="nome" /><br>
+			<input type="text" name="nome" required/><br>
 			<label>E-mail:</label>
-			<input type="text" name="email" /><br> 
+			<input type="email" name="email" required/><br> 
 			<label>CPF:</label>
-			<input	type="text" name="cpf" /><br>
+			<input	type="text" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" name="cpf" required/><br>
 			<br>
 			<input type="submit"	value="Cadastrar">
 		</form>
