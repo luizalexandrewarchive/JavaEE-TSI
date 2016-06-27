@@ -12,22 +12,22 @@ import br.com.luizalexandrew.dao.UsuarioDao;
 @WebServlet("/ExcluirUsuario")
 public class ExcluirUsuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
- 
-    public ExcluirUsuario() {
-        super();
-    }
 
+	public ExcluirUsuario() {
+		super();
+	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		response.sendRedirect("Administracao.jsp");
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		UsuarioDao userDao = new UsuarioDao();
 		userDao.remove(request.getParameter("idexcluir"));
 		response.sendRedirect("Administracao.jsp");
 		
 	}
-
 }

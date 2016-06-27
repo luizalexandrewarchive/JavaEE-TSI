@@ -13,8 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
-
 @WebFilter(filterName="FiltroLogado", urlPatterns={"/Administracao.jsp", "/ExcluirUsuario"})
 public class FiltroLogado implements Filter {
 
@@ -31,21 +29,16 @@ public class FiltroLogado implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse rep = (HttpServletResponse) response;
 		HttpSession session = req.getSession(false);
-
 		  
 		try{
 			if(session.getAttribute("logado") == "OK"){
-				System.out.println("Usuario logado: " + session.getAttribute("nome"));
 				chain.doFilter(request, response);
 			}else{
-				System.out.println("Usuario nao Logado3");
 				rep.sendRedirect("Login.jsp");
 			}
 		}catch(Exception e){
-			System.out.println("Usuario nao Logado2");
 			rep.sendRedirect("Login.jsp");
 		}
-
 		
 	}
 
