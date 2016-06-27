@@ -8,44 +8,38 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import br.com.luizalexandrew.bo.UsuarioBO;
 import br.com.luizalexandrew.model.Usuario;
 
-@WebServlet("/CadastrarUsuario")
-public class CadastrarUsuario extends HttpServlet {
+@WebServlet("/AlterarUsuario")
+public class AlterarUsuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public CadastrarUsuario() {
+	public AlterarUsuario() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.sendRedirect("Cadastro.jsp");
+		response.sendRedirect("Administracao.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Usuario user = new Usuario(request.getParameter("nome"), request.getParameter("email"),
-				request.getParameter("usuario"), request.getParameter("senha"));
+		Usuario user = new Usuario(Integer.parseInt(request.getParameter("id")), request.getParameter("nome"),
+				request.getParameter("email"), request.getParameter("usuario"));
 
-		boolean resultado = UsuarioBO.adicionar(user);
-
-		HttpSession session = request.getSession(false);
+		boolean resultado = UsuarioBO.alterar(user);
 
 		if (resultado) {
-			if (session.getAttribute("logado") == "OK") {
-				response.sendRedirect("Administracao.jsp");
-			} else {
-				response.sendRedirect("CadastroSucesso.jsp");
-			}
+			response.sendRedirect("Administracao.jsp");
 		} else {
-			request.setAttribute("erroCadastro", "Erro ao cadastrar usuário, tente novamente.");
-			RequestDispatcher rd = request.getRequestDispatcher("Cadastro.jsp");
+			request.setAttribute("erroAlterar", "Erro ao alterar usuário, tente novamente.");
+			RequestDispatcher rd = request.getRequestDispatcher("Administracao.jsp");
 			rd.forward(request, response);
 		}
+
 	}
 }

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-	<h2>Cadastrar</h2>
+	<h1>Cadastrar Usuário</h1>
 	
 	<c:if test="${not empty erroCadastro}">
     	<p>${erroCadastro}</p>
@@ -19,5 +19,5 @@
 		<br>
 		<input type="submit" value="Cadastrar">
 	</form>
-	
-	<a href="Login.jsp"><p>Fazer Login</p></a>
+	<br>
+	<a href="Administracao.jsp"><button>Cancelar</button></a>
