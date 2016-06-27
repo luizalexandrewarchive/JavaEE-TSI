@@ -14,7 +14,7 @@ import br.com.luizalexandrew.model.Usuario;;
 public class UsuarioDao {
 	
 	private Connection connection;
-	
+		
 	public UsuarioDao(){
 		this.connection = ConnectionFactory.getConnection();
 	}
@@ -69,9 +69,9 @@ public class UsuarioDao {
 		}
 		return user;		
 	}
+	 
 	
-	
-	public List<Usuario> recuperarAll(){
+	public List<Usuario> getLista(){
 		ResultSet resultado = null;
 		List<Usuario> usuarios = new ArrayList<Usuario>();
 		String sql = "SELECT * FROM loginFinalDPD.usuarios";

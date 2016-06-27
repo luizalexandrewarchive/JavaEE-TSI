@@ -27,7 +27,6 @@ public class LoginUsuario extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
 		UsuarioDao userDao = new UsuarioDao();
 		Usuario user = userDao.validarUsuario(request.getParameter("usuario"), request.getParameter("senha"));
 		
@@ -41,9 +40,7 @@ public class LoginUsuario extends HttpServlet {
 			response.sendRedirect("Administracao.jsp");
 			
 		}else{
-			System.out.println("erro no login");
-			
-			
+			System.out.println("erro no login");		
 
 			request.setAttribute("erroLogin", "Usuário ou senha incorreto");
 			
